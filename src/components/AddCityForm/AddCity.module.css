@@ -1,0 +1,98 @@
+.container {
+    position: fixed;
+    top: 20%;
+    left: 35%;
+    z-index: 200;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 2px #ccc;
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+    box-sizing: border-box;
+    transition: all 0.3s ease-out;
+    min-width: fit-content;
+    height: fit-content;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    
+    
+}
+.container select, 
+.container  button {
+    padding: 0.4rem 0.2rem;
+    margin: 0.4rem 0.2rem;
+    width: 80%;
+    
+}
+
+
+
+.FormOpen {
+    display: flex;
+    animation: openForm 0.4s ease-out forwards;
+}
+
+.FormClosed {
+    display: none;
+    animation: closeForm 0.4s ease-out forwards;
+}
+
+@keyframes openForm {
+    0% {
+        opacity: 0;
+        transform: translateY(-200%);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateY(60%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes closeForm {
+    0% {
+        opacity: 0;
+    }
+    49% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateY(60%);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-200%);
+    }
+}
+ 
+
+@media (max-width: 1130px) {
+    .container {
+        width: 50%;
+        left: 25%;
+        background-color: red;
+        
+    }
+}
+@media (max-width: 600px) {
+    .container {
+       
+        
+        min-width: 0;
+        left: 10%;
+        width: 80%;
+        
+        
+    
+        background-color: purple;
+    }
+   
+}

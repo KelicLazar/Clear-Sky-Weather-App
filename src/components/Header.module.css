@@ -1,0 +1,67 @@
+h1 {
+    margin: 0 ;
+    font-family: 'Nuosu SIL', serif;
+    font-size: xx-large;
+    line-height: 150%;
+    color: aliceblue;
+    margin-left: 15px;
+    
+  }
+  /* button {
+    background-color: whitesmoke;
+    border: 1px solid black;
+    margin-left: 15px;
+    font-size: larger;
+    font-family: "Popins", sans-serif;
+    color: black;
+    padding: 0.2rem 0.4rem;
+    width: 10%;
+    height: 32px;
+    min-width: fit-content;
+    border-radius: 5px;
+  }
+  button:hover {
+    box-shadow:  4px 4px 4px #575555e8;
+    border: none;
+    
+  } */
+  
+  .backgroundImage {
+    background-image: url("../public/sky12.webp");
+    background-size: cover;
+    background-position: 0% 30%;
+    width: 100%;
+    height: 170px;
+    min-height: auto;
+    filter: contrast(210%) brightness(80%);
+    box-shadow: 0 2px 2px #ccc;
+  
+  }
+  
+  .backgroundImage button {
+    margin-left: 1rem;
+    padding: 0.4rem 0.8rem;
+    line-height: 32px;
+    font-size: larger;
+    background-color: #ff000040;
+    border: #8ECECE 2px solid;
+    color: white;
+    border-radius: 4px 12px;
+    
+    
+  }
+  .backgroundImage button:hover {
+    transform: scale(104%);
+    box-shadow: 2px 2px 2px #8ECECE ;
+    background-color: #3c1e1e51;
+  }
+  .backgroundImage * {
+    text-decoration: none;
+  }
+  
+  @media (max-width: 800px){
+    h1 {
+      font-size:x-large;
+    }
+  }
+  
