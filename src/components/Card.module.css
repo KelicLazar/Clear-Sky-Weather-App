@@ -1,4 +1,4 @@
-.city  {
+/* .city  {
     background-image: url('../../public/Background1.png');
     background-size: cover;
     width: 28%;
@@ -15,7 +15,7 @@
     display: inline-block;
     flex-grow: 1;
    
-}
+} */
 
 
 .city:last-child {
@@ -72,10 +72,7 @@
 
 }
 @media (max-width: 1430px) {
-    .city {
-        /* max-width: 100%; */
-
-       }
+    
        .city:last-child {
         flex-shrink: 1;
         flex-grow: 1;

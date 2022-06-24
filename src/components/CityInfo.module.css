@@ -1,0 +1,55 @@
+.table {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background-color: rgba(58, 56, 54, 0.7);
+    border-radius: 15px;
+    height: fit-content;
+     padding: 0.4rem 0.3rem;
+    margin: 0.8rem auto;
+    font-size: smaller;
+    width: 90%;
+   
+   
+}
+.table > div > p {
+    font-size: larger;
+    
+}
+ .table div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0.1rem 0.2rem;
+    
+
+
+}
+.table p {
+    margin: 0 auto;
+    width: fit-content;
+    position: relative;
+    top: -20%;
+    font-weight: light;
+    text-align: center;
+    padding: 0.1rem 0.2rem;
+    
+}
+.table p:last-child {
+    font-size: larger;
+    font-weight: bolder;
+    
+}
+h1 {
+    margin: 0;
+    padding: 0;
+}
+
+@media (max-width: 686px) {
+    .table > div > p {
+        font-size: smaller;
+        
+    }
+    
+    
+}

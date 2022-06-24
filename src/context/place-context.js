@@ -52,7 +52,7 @@ const PlacesContextProvider = (props) => {
       long: data.coord.lon,
     };
     const getWeatherData = await fetch(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${fullCity.lat}&lon=${fullCity.long}&units=metric&exclude=hourly,minutely&appid=${process.env.REACT_APP_API_KEY}`
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${fullCity.lat}&lon=${fullCity.long}&units=metric&exclude=minutely&appid=${process.env.REACT_APP_API_KEY}`
     );
     const weatherData = await getWeatherData.json();
     console.log("This is weather data", weatherData);
