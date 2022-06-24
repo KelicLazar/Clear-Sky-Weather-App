@@ -1,6 +1,6 @@
 .container {
     display: flex;
-    width: 80%;
+    width: 90%;
     margin: 1rem auto;
     flex-direction: row;
     flex-wrap: wrap;
@@ -9,48 +9,7 @@
 }
 
 
-.city {
-    background-image: url('../../public/Background1.png');
-    background-size: cover;
-    width: 350px;
-    /* min-width: 250px; */
-    /* height: fit-content; */
-    color: white;
-    font-weight: bolder;
-    border: 1px;
-    border-radius: 15px;
-    transition: all 0.2s ease;
-    margin: 0.8rem 1.6rem;
-    display: inline-block;
-     
-}
 
-.city img {
-    transform: scale(140%);
-    display: block;
-    width: fit-content;
-    margin: auto;
-    filter: drop-shadow(0 0 4px white);
-    align-self: center;
-}
-.city > * {
-   width: fit-content;
-   margin: auto;
-   padding-top: 5px;
-}
-.city h2 span {
-    background-color: rgba(210, 105, 30, 0.701);
-    padding: 2px 4px;
-    margin-left: 5px;
-    border-radius: 9px 3px ;
-    font-size: 0.8em;
-
-}
-.city:hover {
-    transform: scale(106%);
-    box-shadow:  4px 4px 4px #575555e8;
-
-}
 .table {
     display: flex;
     flex-direction: row;
@@ -62,11 +21,13 @@
     margin: 0.4rem auto;
     width: fit-content;
     min-width: auto;
+    
 }
 .table div {
     display: flex;
     flex-direction: column;
     justify-content: center;
+
 
 }
 .table p {
@@ -82,18 +43,12 @@
     transform: scale(80%);
 }
 
-@media (max-width: 1130px){
+ @media (max-width: 1130px){
     .container {
-        justify-content: center;
-        width: 90%;
-        
-    }
+        width: 100%;
+    } 
    
    
-}
-@media (max-width: 600px) {
-    .city {
-        width: 250px;
-       }
-}
- 
+   
+} 
+

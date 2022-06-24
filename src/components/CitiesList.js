@@ -1,12 +1,23 @@
 import classes from "./CitiesList.module.css";
 import { useContext } from "react";
 import { PlacesContext } from "../context/place-context";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  Link,
+  useNavigate,
+} from "react-router-dom";
+import Card from "./Card";
 
 const CitiesList = () => {
   const placesCtx = useContext(PlacesContext);
+  const navigate = useNavigate();
 
-  const moreInfoHandler = (index) => {};
+  const moreInfoHandler = (index) => {
+    console.log(`/${placesCtx.favoritePlaces[index].cityName}`);
+    navigate(`/${placesCtx.favoritePlaces[index].cityName}`);
+  };
 
   return (
     <div className={classes.container}>
@@ -70,19 +81,16 @@ const CitiesList = () => {
         const img3 = `http://openweathermap.org/img/wn/${city.daily[2].weather[0].icon}.png`;
         const img4 = `http://openweathermap.org/img/wn/${city.daily[3].weather[0].icon}.png`;
         return (
-          <Link to={`/${placesCtx.favoritePlaces[index].cityName}`}>
+          <Card key={index} className={classes.city}>
             <div
               onClick={() => {
                 moreInfoHandler(index);
               }}
-              className={classes.city}
-              key={index}
             >
               <h2>
                 {placesCtx.favoritePlaces[index].cityName},
                 <span>{placesCtx.favoritePlaces[index].cityCode} </span>
               </h2>
-
               <p>
                 {weekDay},<span> {date}</span>
               </p>
@@ -110,7 +118,7 @@ const CitiesList = () => {
                 </div>
               </div>
             </div>
-          </Link>
+          </Card>
         );
       })}
     </div>
