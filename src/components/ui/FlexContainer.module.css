@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    width: 90%;
+    margin: 1rem auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    
+}
+
+@media (max-width: 1130px){
+    .container {
+        width: 100%;
+    } 
+} 
+@media (max-width: 686px) {
+    .container {
+        justify-content: center;
+       }
+       
+}

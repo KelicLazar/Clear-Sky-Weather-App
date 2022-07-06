@@ -1,0 +1,163 @@
+
+details {
+    cursor:default;
+}
+summary {
+    display: block;
+}
+
+.container {
+    width: 70%;
+    margin: 4rem auto;
+    background-color: rgba(255, 255, 255, 0.247);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+
+}
+.container h1 {
+    text-align: center;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+.flexContainer * {
+    display: inline;
+    
+    vertical-align: middle;
+    
+    
+    
+    
+}
+.flexContainer {
+    /* background-color: #d1cec9; */
+    border: 2px solid rgb(161, 161, 161);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: #adc9c9; */
+    font-size: 2rem;
+    
+    
+    
+    
+}
+.flexItem {
+    /* background-color: aqua; */
+    width: 45%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100% !important;
+    font-size: 0.6em;
+    
+
+    
+}
+.flexItem:first-child p:first-child {
+    font-weight: bold;
+}
+
+
+.subFlexItem {
+    /* background-color: rgb(225, 140, 65); */
+    height: fit-content;
+    
+    width: 50%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+   
+    text-align: center;
+  
+}
+/* .subFlexItem:first-child {
+    justify-content: space-between;
+} */
+.subFlexItem img{
+    
+    width: 50px;
+
+}
+.subFlexItem p {
+    width: fit-content;
+    padding: 0rem 0.6rem;
+}
+svg {
+
+height: 40px;
+fill: rgb(27, 77, 228);
+color: rgb(27, 77, 228);
+}
+
+
+.ul {
+    width: 90%;
+    margin: 1rem auto;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    border: 2px solid rgb(161, 161, 161);
+}
+.ul li {
+    margin: 2%;
+    padding: 3%;
+    border: 1px solid rgb(161, 161, 161);
+    display: flex;
+    flex-direction: row;
+    width: 15%;
+}
+.spanContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.spanContainer span:last-child {
+    font-weight:bold;
+}
+
+@media screen and (max-width: 868px) {
+    
+
+
+    
+    
+    .flexItem {
+        width: 100%;
+        font-size: small;
+    }
+    
+    .flexItem:last-child {
+        display: none;
+    }
+    
+    .subFlexItem {
+        flex-direction: row;
+        padding:  0.2rem 0;
+        gap: 0;
+        
+    }
+    .subFlexItem img {
+        width: 25px;
+        
+    }
+    .ul {
+        flex-wrap: wrap;
+    }
+    .ul li {
+        width: 35%;
+    }
+    .moreInfo {
+        font-size: small;
+    }
+    
+   
+   
+    
+}

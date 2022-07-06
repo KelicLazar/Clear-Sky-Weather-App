@@ -45,14 +45,16 @@ const AddCity = (props) => {
     setIsSelected((prevValue) => ({ ...prevValue, city: true }));
   };
 
-  const addCityHandler = () => {
-    // placesCtx.addCity(cityToAdd);
-
-    placesCtx.addFavoritePlace(cityToAdd);
+  const closeFormHandler = () => {
     props.close();
     countryRef.current.value = "--Select Country--";
     cityRef.current.value = "--Select City--";
     setIsSelected({ country: false, city: false });
+  };
+
+  const addCityHandler = () => {
+    placesCtx.addFavoritePlace(cityToAdd);
+    closeFormHandler();
   };
 
   return (
@@ -70,7 +72,9 @@ const AddCity = (props) => {
           {places.map((item, index) => {
             return (
               <option key={index} value={item.country}>
-                {item.country}
+                {item.country.length > 20
+                  ? item.country.substr(0, 17) + "..."
+                  : item.country}
               </option>
             );
           })}
@@ -87,7 +91,7 @@ const AddCity = (props) => {
           {availableCitiesInSelectedCountry.map((city, index) => {
             return (
               <option key={index} value={city}>
-                {city}
+                {city.length > 20 ? city.substr(0, 17) + "..." : city}
               </option>
             );
           })}
@@ -96,13 +100,12 @@ const AddCity = (props) => {
           onClick={addCityHandler}
           disabled={!isSelected.country || !isSelected.city}
         >
-          Addd City
+          Add City
         </button>
-        <button onClick={props.close}>Close</button>
-        {placesCtx.favoritePlaces.map((city, index) => {
+        <button onClick={closeFormHandler}>Close</button>
+        {/* {placesCtx.favoritePlaces.map((city, index) => {
           return <h2 key={index}>{city.cityName}</h2>;
-        })}
-        {placesCtx.error && <h4 style={{ color: "red" }}>{placesCtx.error}</h4>}
+        })} */}
       </div>
     </React.Fragment>
   );

@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-import { BrowserRouter, Link, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import AddCity from "./components/AddCityForm/AddCity";
 import Backdrop from "./components/Backdrop/Backdrop";
 import CitiesList from "./components/CitiesList";
 import CityInfo from "./components/CityInfo";
-import Header from "./components/Header";
+import CityGuardWrapper from "./components/ui/CityGuardWrapper";
+import CityInfoHourly from "./components/CityInfoHourly";
+import Nav from "./components/Nav";
 
 function App() {
-  // const [lat, setLat] = useState("");
-  // const [long, setLong] = useState("");
-  // const [data, setData] = useState([]);
-  // const placesCtx = useContext(PlacesContext);
   const [showBackdrop, setShowBackdrop] = useState(false);
 
   const showBackdropHandler = () => {
@@ -28,11 +26,7 @@ function App() {
           path="/"
           element={
             <React.Fragment>
-              <Header>
-                <button id="addButton" onClick={showBackdropHandler}>
-                  + Add City
-                </button>
-              </Header>
+              <Nav onClick={showBackdropHandler}></Nav>
 
               <Backdrop
                 onClose={closeBackdropHandler}
@@ -47,7 +41,23 @@ function App() {
             </React.Fragment>
           }
         ></Route>
-        <Route path="/:city" element={<CityInfo></CityInfo>}></Route>
+        <Route
+          path="/:city/"
+          element={
+            <CityGuardWrapper>
+              <CityInfo />
+            </CityGuardWrapper>
+          }
+        ></Route>
+        <Route
+          path="/:city/hourly"
+          element={
+            <CityGuardWrapper>
+              <CityInfoHourly />
+            </CityGuardWrapper>
+          }
+        ></Route>
+        <Route path="/*" element={<Navigate to="/" replace />}></Route>
       </Routes>
     </BrowserRouter>
   );

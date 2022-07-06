@@ -1,0 +1,88 @@
+ .navBar{
+    margin: 0 ;
+    padding: 0; 
+    position: sticky;
+    top:-1px;
+    z-index: 5;
+    background-image:url("../../public/sky12.webp");
+    background-size: cover;
+    background-position: 0% 0%;
+    border-bottom: 3px solid white;
+        
+}
+.navBar h1 {
+    text-align: center;
+    margin: 0 auto;
+    color: white;
+  
+}
+
+.navUl {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-start;
+    gap: 5%;
+    background-color: transparent;
+    align-items: center;   
+    height: 45px;
+    margin: 0;
+    padding: 0.5rem ;
+    
+
+}
+.navUl li {
+    width: fit-content;
+    font-size: x-large;
+    height:fit-content;
+  
+}
+.navUl li:first-child {
+    min-width: fit-content;
+    width: 35%;
+    margin-left: 2%;
+}
+.navBar button {
+    padding: 0.4rem 0.8rem;
+    background-color: #0d0a9340;
+    border: #8ECECE 2px solid;
+    color: white;
+    border-radius:  12px ;
+    transition: 0.1s;
+    
+    
+  }
+  .navBar  button:hover {
+    cursor:pointer;
+    background-color: #3c1e1e51;
+    border-radius:  36px 12px;
+  
+  }
+.navUl  * {
+    color: white;
+    text-decoration: none;    
+}
+
+.active, .navBar li a:hover {
+    box-sizing: border-box;
+    border-bottom: 2px solid white;
+  
+} 
+.title {
+    padding: 0.4rem;
+}
+.title:hover {
+    cursor:pointer;
+}
+
+@media screen and (max-width: 868px) {
+    .navUl li {
+        font-size: large;
+    }
+    .navUl {
+        flex-wrap: nowrap;
+        padding: 0;
+    }
+    
+    
+}
