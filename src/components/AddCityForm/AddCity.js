@@ -72,7 +72,9 @@ const AddCity = (props) => {
           {places.map((item, index) => {
             return (
               <option key={index} value={item.country}>
-                {item.country}
+                {item.country.length > 20
+                  ? item.country.substr(0, 17) + "..."
+                  : item.country}
               </option>
             );
           })}
@@ -89,7 +91,7 @@ const AddCity = (props) => {
           {availableCitiesInSelectedCountry.map((city, index) => {
             return (
               <option key={index} value={city}>
-                {city}
+                {city.length > 20 ? city.substr(0, 17) + "..." : city}
               </option>
             );
           })}

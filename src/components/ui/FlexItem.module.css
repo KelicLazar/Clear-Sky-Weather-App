@@ -13,16 +13,14 @@
     position: relative;
     overflow: hidden;
     flex-grow: 1;
+    border: white 2px solid;
  
 }
 .item > * {
     padding: 0.2rem;
     
 }
-.item:first-child {
-    border: white 4px solid;
-         
-}
+
 .item h2 {
     width: fit-content;
     margin: auto;

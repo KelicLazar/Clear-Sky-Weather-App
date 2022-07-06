@@ -5,9 +5,12 @@ export const PlacesContext = React.createContext({
   error: null,
   isVisible: false,
   cityWeatherInfo: [],
+  isCityLoading: [],
   showForm: () => {},
   addFavoritePlace: () => {},
-  removeFavoritePlace: () => {},
+  removeFavoritePlace: (index) => {},
+  refetchData: (index) => {},
+  fetchOnLoad: () => {},
 });
 
 const PlacesContextProvider = (props) => {
@@ -15,7 +18,23 @@ const PlacesContextProvider = (props) => {
   const [cityWeatherInfo, setCityWeatherInfo] = useState([]);
   const [error, setError] = useState(null);
   const [isVisible, setIsvisible] = useState(false);
+  const [isCityLoading, setIsCityLoading] = useState([]);
   console.log("loaded ctxprovider");
+
+  const fetchWeatherData = async (fullCity) => {
+    const getWeatherData = await fetch(
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${fullCity.lat}&lon=${fullCity.long}&units=metric&exclude=minutely&appid=${process.env.REACT_APP_API_KEY}`
+    );
+    const weatherData = await getWeatherData.json();
+
+    setCityWeatherInfo((prevValue) => {
+      return [...prevValue, weatherData];
+    });
+    setIsCityLoading((prevValue) => {
+      return [...prevValue, false];
+    });
+    setIsvisible(false);
+  };
 
   const addFavoritePlaceHandler = async (city) => {
     if (favPlaces.some((e) => e.cityName === city)) {
@@ -32,6 +51,7 @@ const PlacesContextProvider = (props) => {
       }, 2000);
       return;
     }
+
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}`
     );
@@ -44,32 +64,58 @@ const PlacesContextProvider = (props) => {
       throw Error(response.statusText);
     }
     const data = await response.json();
-    console.log(data);
+
     const fullCity = {
       cityName: city,
       cityCode: data.sys.country,
       lat: data.coord.lat,
       long: data.coord.lon,
     };
-    const getWeatherData = await fetch(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${fullCity.lat}&lon=${fullCity.long}&units=metric&exclude=minutely&appid=${process.env.REACT_APP_API_KEY}`
-    );
-    const weatherData = await getWeatherData.json();
-    console.log("This is weather data", weatherData);
-    console.log(weatherData.daily[0].temp.day);
-    console.log(fullCity);
     setFavPlaces((prevValue) => {
       return [...prevValue, fullCity];
     });
-    setCityWeatherInfo((prevValue) => {
-      return [...prevValue, weatherData];
-    });
-    setIsvisible(false);
+
+    fetchWeatherData(fullCity);
   };
+
   const onShow = () => {
     setIsvisible(true);
   };
-  const removeFavoritePlaceHandler = () => {};
+  const removeFavoritePlaceHandler = (ind) => {
+    const updatedFavPlaces = favPlaces.filter((place, index) => {
+      return index !== ind;
+    });
+    setFavPlaces(updatedFavPlaces);
+    const updatedIsCityLoading = isCityLoading.filter((state, index) => {
+      return index !== ind;
+    });
+    setIsCityLoading(updatedIsCityLoading);
+    const updatedCityWeatherInfo = cityWeatherInfo.filter((cityInfo, index) => {
+      return index !== ind;
+    });
+    setCityWeatherInfo(updatedCityWeatherInfo);
+  };
+  const refetchDataHandler = async (index) => {
+    setIsCityLoading((prevValue) => {
+      return [...prevValue, (prevValue[index] = true)];
+    });
+    console.log(favPlaces[index]);
+
+    const cityToRefetch = favPlaces[index];
+    const refetchInfo = await fetch(
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${cityToRefetch.lat}&lon=${cityToRefetch.long}&units=metric&exclude=minutely&appid=${process.env.REACT_APP_API_KEY}`
+    );
+    const newData = await refetchInfo.json();
+    console.log("ovo je newData", newData.current.dt);
+    const copyData = cityWeatherInfo;
+    console.log("ovo je copyData", copyData);
+    copyData[index] = newData;
+    console.log("ovo je copyData[index]", copyData[index].current.dt);
+    setCityWeatherInfo(copyData);
+    setIsCityLoading((prevValue) => {
+      return [...prevValue, (prevValue[index] = false)];
+    });
+  };
 
   return (
     <PlacesContext.Provider
@@ -78,9 +124,12 @@ const PlacesContextProvider = (props) => {
         error: error,
         cityWeatherInfo: cityWeatherInfo,
         isVisible: isVisible,
+        isCityLoading: isCityLoading,
         showForm: onShow,
         addFavoritePlace: addFavoritePlaceHandler,
         removeFavoritePlace: removeFavoritePlaceHandler,
+        refetchData: refetchDataHandler,
+        fetchOnLoad: fetchWeatherData,
       }}
     >
       {props.children}
