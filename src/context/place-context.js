@@ -19,7 +19,6 @@ const PlacesContextProvider = (props) => {
   const [error, setError] = useState(null);
   const [isVisible, setIsvisible] = useState(false);
   const [isCityLoading, setIsCityLoading] = useState([]);
-  console.log("loaded ctxprovider");
 
   const fetchWeatherData = async (fullCity) => {
     const getWeatherData = await fetch(
@@ -99,18 +98,17 @@ const PlacesContextProvider = (props) => {
     setIsCityLoading((prevValue) => {
       return [...prevValue, (prevValue[index] = true)];
     });
-    console.log(favPlaces[index]);
 
     const cityToRefetch = favPlaces[index];
     const refetchInfo = await fetch(
       `https://api.openweathermap.org/data/2.5/onecall?lat=${cityToRefetch.lat}&lon=${cityToRefetch.long}&units=metric&exclude=minutely&appid=${process.env.REACT_APP_API_KEY}`
     );
     const newData = await refetchInfo.json();
-    console.log("ovo je newData", newData.current.dt);
+
     const copyData = cityWeatherInfo;
-    console.log("ovo je copyData", copyData);
+
     copyData[index] = newData;
-    console.log("ovo je copyData[index]", copyData[index].current.dt);
+
     setCityWeatherInfo(copyData);
     setIsCityLoading((prevValue) => {
       return [...prevValue, (prevValue[index] = false)];

@@ -11,7 +11,6 @@ const CitiesList = () => {
   const navigate = useNavigate();
 
   const moreInfoHandler = (index) => {
-    console.log(`/${placesCtx.favoritePlaces[index].cityName}`);
     navigate(`/${placesCtx.favoritePlaces[index].cityName}`);
   };
   const removeCityHandler = (index) => {
