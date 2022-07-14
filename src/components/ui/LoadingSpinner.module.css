@@ -1,0 +1,37 @@
+.spinner {
+  display: inline;
+  width: 80px;
+  height: 80px;
+  
+  
+  
+}
+.centered {
+  margin: 3rem auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #1C1C6E;
+  font-size: larger;
+}
+.spinner:after {
+  content: ' ';
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #1C1C6E;
+  border-color: #1C1C6E transparent #1C1C6E transparent;
+  animation: spinner 1.2s linear infinite;
+}
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
