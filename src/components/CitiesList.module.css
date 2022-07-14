@@ -12,6 +12,7 @@
     min-width: auto;
     
 }
+
 .table div { 
     display: flex;
     flex-direction: column;
