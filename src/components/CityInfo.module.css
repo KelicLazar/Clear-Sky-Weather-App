@@ -46,11 +46,36 @@ h1 {
     text-align: end;
     margin-right: 2%;
 }
+summary {
+    position: relative;
+}
+summary::after{
+    content: '';
+    position: absolute;
+    right: 20px;
+    top: calc(50% - 5px);
+    width: 10px;
+    height: 10px;
+    background-color: transparent;
+    border-bottom: 3px solid #A1A1A1;
+    border-right: 3px solid #A1A1A1;
+    transform: rotateZ(-45deg);
+    transition: transform 0.3s ;
+}
+
+details[open] summary::after {
+    
+    transform: rotateZ(45deg);
+    transition: transform 0.3s ;
+}
 
 @media (max-width: 686px) {
     .table > div > p {
         font-size: smaller;
         
+    }
+    summary::after {
+        right: 4%;
     }
     
     
