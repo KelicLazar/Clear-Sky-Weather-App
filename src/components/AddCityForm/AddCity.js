@@ -31,7 +31,7 @@ const AddCity = (props) => {
 
   useEffect(() => {
     getPlacesHandler();
-  });
+  }, []);
   const selectedCountryHandler = (event) => {
     // placesCtx.getCitiesOfSelectedCountry(event.target.value);
     const selectedCountryIndex = places.findIndex(
