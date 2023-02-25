@@ -1,29 +1,19 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { PlacesContext } from "../context/place-context";
-import Nav from "./Nav";
+import Nav from "../ui/Nav";
 import classes from "./CityInfo.module.css";
-import FlexContainer from "./ui/FlexContainer";
-import FlexItem from "./ui/FlexItem";
-import { getCityInfo } from "../services/city-services";
-import { useState } from "react";
-import { useEffect } from "react";
-import { Skeleton } from "@mui/material";
+import FlexContainer from "../ui/FlexContainer";
+import FlexItem from "../ui/FlexItem";
+import {
+  getDateData,
+  getOpenWeatherIcon,
+  weekDays,
+} from "../../services/date-services";
 
 const CityInfo = () => {
   const params = useParams();
   const location = useLocation();
-  // const [cityInfo, setCityInfo] = useState([]);
   const cityInfo = location.state;
-  console.log(cityInfo, "cityInfo");
-  console.log("location", location);
-  console.log(params.city);
-
-  const placesCtx = useContext(PlacesContext);
-  const placeIndex = 1;
-  // placesCtx.favoritePlaces.findIndex(
-  //   (element) => element.cityName === params.city
-  // );
 
   return (
     <React.Fragment>
@@ -31,28 +21,8 @@ const CityInfo = () => {
 
       <FlexContainer>
         {cityInfo.daily.map((day, index) => {
-          const dateObj = new Date(day.dt * 1000);
-          let date = dateObj.getDate();
+          const { dateObj, date, numDate } = getDateData(day.dt * 1000);
 
-          let numDate = "";
-          if (Number(String(date).slice(-1)) === 1) {
-            numDate = "st";
-          } else if (Number(String(date).slice(-1)) === 2) {
-            numDate = "nd";
-          } else if (Number(String(date).slice(-1)) === 3) {
-            numDate = "rd";
-          } else {
-            numDate = "th";
-          }
-          let weekDays = [
-            "Sunday",
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-          ];
           const weekDay = weekDays[dateObj.getDay()];
 
           return (
@@ -67,14 +37,10 @@ const CityInfo = () => {
               <div>
                 <p>{params.city}</p>
 
-                <img
-                  alt=""
-                  src={`http://openweathermap.org/img/wn/${day.weather[0].icon}.png`}
-                ></img>
+                <img alt="" src={getOpenWeatherIcon(day.weather[0].icon)}></img>
 
-                <p>
-                  {day.weather[0].description.charAt(0).toUpperCase() +
-                    day.weather[0].description.slice(1)}
+                <p style={{ textTransform: "Capitalize" }}>
+                  {day.weather[0].description}
                 </p>
                 <p>Daily Temperature {Math.round(day.temp.day)}°C</p>
               </div>

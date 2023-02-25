@@ -11,6 +11,8 @@ summary {
   background-color: rgba(255, 255, 255, 0.247);
   padding: 0.5rem 1rem;
   border-radius: 20px;
+  color: white;
+  text-shadow: 1px 1px 2px black;
 }
 .container h1 {
   text-align: center;
@@ -22,17 +24,14 @@ summary {
   vertical-align: middle;
 }
 .flexContainer {
-  /* background-color: #d1cec9; */
   border: 2px solid rgb(161, 161, 161);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  /* background-color: #adc9c9; */
   font-size: 2rem;
 }
 .flexItem {
-  /* background-color: aqua; */
   width: 45%;
   display: flex;
   justify-content: space-around;
@@ -44,7 +43,6 @@ summary {
 }
 
 .subFlexItem {
-  /* background-color: rgb(225, 140, 65); */
   height: fit-content;
 
   width: 50%;
@@ -56,9 +54,7 @@ summary {
 
   text-align: center;
 }
-/* .subFlexItem:first-child {
-    justify-content: space-between;
-} */
+
 .subFlexItem img {
   width: 50px;
 }

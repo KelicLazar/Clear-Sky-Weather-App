@@ -1,31 +1,19 @@
-import React, { useState, Suspense, useContext } from "react";
-import { useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useState, Suspense, useEffect } from "react";
 import "./App.css";
-import { PlacesContext } from "./context/place-context";
-import { getCitiesInfo, refreshCity } from "./services/city-services";
-import AddCity from "./components/AddCityForm/AddCity";
-import Backdrop from "./components/Backdrop/Backdrop";
-import {
-  Alert,
-  AlertTitle,
-  Fade,
-  Skeleton,
-  Slide,
-  Snackbar,
-  Zoom,
-} from "@mui/material";
-const CitiesList = React.lazy(() => import("./components/CitiesList"));
-const CityInfo = React.lazy(() => import("./components/CityInfo"));
-
-const CityInfoHourly = React.lazy(() => import("./components/CityInfoHourly"));
-const Nav = React.lazy(() => import("./components/Nav"));
-const LoadingSpinner = React.lazy(() =>
-  import("./components/ui/LoadingSpinner")
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { getCitiesInfo, refreshCity } from "./services/http-services";
+import { Alert, AlertTitle, Slide, Snackbar } from "@mui/material";
+import Nav from "./components/ui/Nav";
+import LoadingSpinner from "./components/ui/LoadingSpinner";
+import CitiesList from "./components/CityComponents/CitiesList";
+const CityInfo = React.lazy(() =>
+  import("./components/CityComponents/CityInfo")
+);
+const CityInfoHourly = React.lazy(() =>
+  import("./components/CityComponents/CityInfoHourly")
 );
 
 function App() {
-  const [showBackdrop, setShowBackdrop] = useState(false);
   const [citiesData, setCitiesData] = useState([]);
   const [error, setError] = useState(null);
 
@@ -36,15 +24,6 @@ function App() {
     })();
   }, []);
 
-  const showBackdropHandler = () => {
-    setShowBackdrop(true);
-  };
-  const closeBackdropHandler = () => {
-    setShowBackdrop(false);
-  };
-  const handleClick = async () => {
-    setCitiesData(await getCitiesInfo());
-  };
   const setCitiesHandler = async (allCitiesData) => {
     if (allCitiesData.message) {
       setError(allCitiesData);
@@ -54,7 +33,6 @@ function App() {
   };
   const refreshCityHandler = async (cityName, index) => {
     const refreshCityResponse = await refreshCity(cityName, index);
-    console.log(refreshCityResponse, "refreshing city response");
     if (refreshCityResponse.message) {
       setError({ message: refreshCityResponse.message, type: "warning" });
     } else {
@@ -62,8 +40,6 @@ function App() {
     }
   };
   const clearErrorHandler = (event, reason) => {
-    console.log(event, "EVENT");
-    console.log(reason, "REASON");
     if (reason === "clickaway") {
       return;
     }
@@ -82,15 +58,11 @@ function App() {
       <Suspense fallback={<LoadingSpinner />}>
         <BrowserRouter>
           <Routes>
-            <Route path="/:city" element={<CityInfo />}></Route>
             <Route
               path="/"
               element={
                 <React.Fragment>
-                  <Nav
-                    onClick={showBackdropHandler}
-                    onAdd={setCitiesHandler}
-                  ></Nav>
+                  <Nav onAdd={setCitiesHandler}></Nav>
 
                   <Slide
                     direction="up"
@@ -126,18 +98,6 @@ function App() {
                     </Snackbar>
                   </Slide>
 
-                  <Backdrop
-                    onClose={closeBackdropHandler}
-                    show={showBackdrop}
-                  ></Backdrop>
-                  {showBackdrop && (
-                    <AddCity
-                      close={closeBackdropHandler}
-                      show={showBackdrop}
-                      onAdd={setCitiesHandler}
-                    ></AddCity>
-                  )}
-
                   <CitiesList
                     citiesData={citiesData}
                     onRemove={setCitiesHandler}
@@ -146,9 +106,9 @@ function App() {
                 </React.Fragment>
               }
             ></Route>
+            <Route path="/:city" element={<CityInfo />}></Route>
 
             <Route path="/:city/hourly" element={<CityInfoHourly />}></Route>
-            {/* <Route path="/*" element={<Navigate to="/" replace />}></Route> */}
           </Routes>
         </BrowserRouter>
       </Suspense>

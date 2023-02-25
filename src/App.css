@@ -1,34 +1,19 @@
-  body, html {
-  margin: 0;
-  padding: 0;
-  
-  
- 
- 
-  
-}
 html {
-  background-image: url(../public/background.jpg) ;
+  background-image: url(../public/background.jpg);
   background-attachment: fixed;
   background-size: cover;
   background-position: center 80%;
   background-repeat: no-repeat;
-  
-
 }
 
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

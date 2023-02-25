@@ -4,7 +4,7 @@
   position: sticky;
   top: -1px;
   z-index: 5;
-  background-image: url("../../public/nav.webp");
+  background-image: url("../../../public/nav.webp");
   background-size: cover;
   background-position: 0% 0%;
   border-bottom: 3px solid white;
@@ -33,13 +33,11 @@
 .navUl li {
   width: fit-content;
   font-size: xx-large;
-  /* height: fit-content; */
   display: flex;
   align-items: center;
 }
 .navUl > li:first-child {
   min-width: fit-content;
-  /* width: 35%; */
   margin: 0;
   margin-right: 22%;
 }
@@ -47,11 +45,6 @@
   display: flex;
   flex-direction: row;
   width: fit-content;
-
-  /* flex-direction: row,
-  gap: 10%,
-  width: fit-content,
-  backgroundColor: red, */
 }
 .navigationContainer > * {
   background-color: transparent;
@@ -78,9 +71,7 @@
   box-sizing: border-box;
   border-bottom: 2px solid white;
 }
-.title {
-  /* padding: 0.4rem; */
-}
+
 .title:hover {
   cursor: pointer;
 }
@@ -116,17 +107,11 @@
     gap: 5%;
     align-items: center;
   }
-  /* .navUl .title {
-    display: none;
-  } */
+
   .navUl > li:first-child {
     margin: 0;
     margin-bottom: 2px;
   }
-  /* .navigationContainer {
-    align-items: center;
-    justify-content: center;
-  } */
 
   .navUl .addCityContainer {
     display: flex;

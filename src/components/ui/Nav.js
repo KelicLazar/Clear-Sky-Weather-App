@@ -2,67 +2,9 @@ import React, { useState } from "react";
 import { NavLink, useLocation, useParams } from "react-router-dom";
 import AsyncSelect from "react-select/async";
 import classes from "./Nav.module.css";
-import { filterCities } from "../context/longCities";
-import { addCity } from "../services/city-services";
-
-const customTheme = (theme) => ({
-  ...theme,
-  colors: {
-    ...theme.colors,
-    primary: "#4533bf",
-    primary25: "#ccc",
-    primary50: "#261590",
-    primary75: "#120758",
-  },
-});
-const customStyles = {
-  singleValue: (provided, state) => ({
-    ...provided,
-    fontWeight: "500",
-    color: "#120758",
-  }),
-  container: (provided, state) => ({
-    ...provided,
-    width: "70%",
-    minWidth: "70%",
-    color: "#120758",
-    borderColor: "#120758",
-    height: "40px",
-  }),
-  valueContainer: (provided, state) => ({
-    ...provided,
-    color: "#120758",
-  }),
-  placeholder: (provided, state) => ({
-    ...provided,
-    fontWeight: "500",
-    color: "#120758",
-  }),
-  menuList: (provided, state) => ({
-    ...provided,
-    border: "2px solid #120758",
-    maxHeight: "220px",
-  }),
-  dropdownIndicator: (provided, state) => ({
-    ...provided,
-    color: state.isFocused ? "#120758" : "#ccc",
-  }),
-  clearIndicator: (provided, state) => ({
-    ...provided,
-    color: "#120758",
-  }),
-  indicatorSeparator: (provided, state) => ({
-    ...provided,
-    backgroundColor: state.isFocused ? "#120758" : "#ccc",
-  }),
-  input: (provided, state) => ({
-    ...provided,
-    color: "#120758",
-    fontWeight: "500",
-    width: "30%",
-    maxWidth: "30%",
-  }),
-};
+import { addCity } from "../../services/http-services";
+import { customStyles, customTheme } from "../../services/styles-services";
+import { filterCities } from "../../services/cities-services";
 
 const filterOptions = (inputValue) => {
   const filteredCities = filterCities(inputValue).map((city) => {
@@ -74,7 +16,6 @@ const filterOptions = (inputValue) => {
 const Nav = (props) => {
   const [selectedCity, setSelectedCity] = useState("");
   const location = useLocation();
-  console.log("location in NAV", location);
 
   const params = useParams();
 
@@ -86,8 +27,6 @@ const Nav = (props) => {
     }
   };
   const addCityHandler = async () => {
-    console.log(selectedCity);
-
     props.onAdd(await addCity(selectedCity));
     setSelectedCity("");
   };
@@ -151,7 +90,7 @@ const Nav = (props) => {
               }}
               cacheOptions
               autoFocus={true}
-              placeholder="City name..."
+              placeholder="Add City..."
               noOptionsMessage={() => {
                 return "Min 3 characters...";
               }}
@@ -168,7 +107,7 @@ const Nav = (props) => {
               }
               onClick={addCityHandler}
             >
-              Add city
+              +Add city
             </button>
           </div>
         )}

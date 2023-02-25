@@ -14,14 +14,12 @@ export const getCityInfo = async (city) => {
     weatherData.cityCode = city.cityCode;
     return weatherData;
   } catch (error) {
-    console.log("this is error", error);
     return { message: error.message, type: "error" };
   }
 };
 
 export const getCitiesInfo = async () => {
   const cities = getSavedCities();
-  console.log(cities);
   let newCitiesInfo = [];
   for (const city of cities) {
     const cityInfo = await getCityInfo(city);
@@ -38,23 +36,16 @@ export const addCity = async (city) => {
       return { message: "That city is already added.", type: "info" };
     }
   }
-  console.log("is it continuing to be added???");
   let cityData;
   try {
-    console.log("request is runned");
     const cityCoordsResponse = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}`
     );
     if (!cityCoordsResponse.ok) {
-      // console.error("There is no info about" + city);
-      console.log(cityCoordsResponse, "cityCordsresponse");
-      // throw Error(cityCoordsResponse.statusText);
       const errorResponse = await cityCoordsResponse.json();
-      console.log("jsoned error", errorResponse);
       errorResponse.type = "error";
       return errorResponse;
     }
-    console.log(cityCoordsResponse, "cityCordsresponse");
 
     const data = await cityCoordsResponse.json();
 
@@ -65,7 +56,6 @@ export const addCity = async (city) => {
       long: data.coord.lon,
     };
   } catch (error) {
-    console.log("reached HERE SOMEHOW", error);
     throw new Error(error.message);
   }
   if (cityData) {

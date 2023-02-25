@@ -1,54 +1,35 @@
-import FlexItem from "./ui/FlexItem";
-import React from "react";
-import { removeCity } from "../services/city-services";
-import classes from "./CitiesList.module.css";
-import { useState } from "react";
-import LoadingSpinner from "./ui/LoadingSpinner";
+import React, { useState } from "react";
+import FlexItem from "../ui/FlexItem";
+import { removeCity } from "../../services/http-services";
+import classes from "./CityItem.module.css";
+
+import LoadingSpinner from "../ui/LoadingSpinner";
 import { useNavigate } from "react-router-dom";
-import { Skeleton } from "@mui/material";
+import {
+  getDateData,
+  getOpenWeatherIcon,
+  weekDays,
+  weekDaysShort,
+} from "../../services/date-services";
 
 const CityItem = ({ city, index, onRemove, onRefresh }) => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const dateObj = new Date(city?.current?.dt * 1000);
-  const date = dateObj.getDate();
-  const hour = dateObj.getHours();
-  const minutes = String(dateObj.getMinutes()).padStart(2, "0");
-
-  let weekDays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-  const weekDaysShort = [
-    "Sun",
-    "Mon",
-    "Tue",
-    "Wed",
-    "Thu",
-    "Fri",
-    "Sat",
-    "Sun",
-    "Mon",
-    "Tue",
-  ];
+  const { dateObj, date, hour, minutes } = getDateData(
+    city?.current?.dt * 1000
+  );
   const weekDay = weekDays[dateObj.getDay()];
   const day2 = weekDaysShort[dateObj.getDay() + 1];
   const day3 = weekDaysShort[dateObj.getDay() + 2];
   const day4 = weekDaysShort[dateObj.getDay() + 3];
 
-  const imageUrl = `http://openweathermap.org/img/wn/${city.current.weather[0].icon}.png`;
-  const img2 = `http://openweathermap.org/img/wn/${city.daily[1].weather[0].icon}.png`;
-  const img3 = `http://openweathermap.org/img/wn/${city.daily[2].weather[0].icon}.png`;
-  const img4 = `http://openweathermap.org/img/wn/${city.daily[3].weather[0].icon}.png`;
+  const imageUrl = getOpenWeatherIcon(city.current.weather[0].icon);
+  const img2 = getOpenWeatherIcon(city.daily[1].weather[0].icon);
+  const img3 = getOpenWeatherIcon(city.daily[2].weather[0].icon);
+  const img4 = getOpenWeatherIcon(city.daily[3].weather[0].icon);
 
   const moreInfoHandler = () => {
-    console.log(city.cityName);
     navigate(`/${city.cityName}`, {
       state: city,
     });
@@ -101,9 +82,8 @@ const CityItem = ({ city, index, onRemove, onRefresh }) => {
 
             <img alt="" src={imageUrl}></img>
 
-            <p>
-              {city.current.weather[0].description.charAt(0).toUpperCase() +
-                city.current.weather[0].description.slice(1)}
+            <p style={{ textTransform: "capitalize" }}>
+              {city.current.weather[0].description}
             </p>
             <p>{Math.round(city.current.temp)}°C</p>
 
