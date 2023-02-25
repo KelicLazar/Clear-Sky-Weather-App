@@ -1,18 +1,19 @@
 import React, { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { PlacesContext } from "../context/place-context";
 import classes from "./CityInfoHourly.module.css";
 import Nav from "./Nav";
 
 const CityInfoHourly = () => {
   const params = useParams();
+  const location = useLocation();
   const placesCtx = useContext(PlacesContext);
 
-  const placeIndex = placesCtx.favoritePlaces.findIndex(
-    (element) => element.cityName === params.city
-  );
+  // const placeIndex = placesCtx.favoritePlaces.findIndex(
+  //   (element) => element.cityName === params.city
+  // );
 
-  const cityInfo = placesCtx.cityWeatherInfo[placeIndex];
+  const cityInfo = location.state;
 
   return (
     <React.Fragment>

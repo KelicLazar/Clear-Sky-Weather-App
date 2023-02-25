@@ -1,83 +1,68 @@
-
- .table {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    background-color: rgba(58, 56, 54, 0.7);
-    border-radius: 15px;
-    height: fit-content;
-    padding: 0.2rem 0.3rem;
-    margin: 0.8rem auto;
-    width: fit-content;
-    min-width: auto;
-    
+.table {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: rgba(58, 56, 54, 0.7);
+  border-radius: 15px;
+  height: fit-content;
+  padding: 0.2rem 0.3rem;
+  margin: 0.8rem auto;
+  width: fit-content;
+  min-width: auto;
+  min-height: 20px;
 }
 
-.table div { 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-
- }
-.table p { 
-     margin: 0 auto;
-    width: fit-content;
-    position: relative;
-     top: -20%; 
-     font-weight: lighter; 
-     
- } 
- .table img {
-    display: inline;
-    transform: scale(80%);
-} 
+.table div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.table p {
+  margin: 0 auto;
+  width: fit-content;
+  position: relative;
+  top: -20%;
+  font-weight: lighter;
+}
+.table img {
+  display: inline;
+  transform: scale(80%);
+}
 .removeButton {
-    position: absolute;
-    right: 0;
-    top: 0;
-    margin: 0;
-    color: white;
-    padding: 0;
-    cursor:default;
-    z-index: 2;
-  }
-  .refreshButton {
-    font-size: x-large;
-    position: absolute;
-    left: 0;
-    top: 0;
-    margin: 0;
-    color: white;
-    padding: 0;
-    cursor:default;
-    z-index: 2;
-  }
-  .removeButton:hover, .refreshButton:hover {
-    text-shadow: 0 0 10px #fff,
-                 0 0 20px #fff,
-                 0 0 30px #ffff,
-                 0 0 40px white,
-                 0 0 50px white,
-                 0 0 60px white,
-                 0 0 70px white;
-  }
-  
-  
-  h5 {
-    width: fit-content;
-    margin: auto;
-    font-size: x-large;
-  }
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0;
+  color: white;
+  padding: 4px;
+  cursor: default;
+  z-index: 2;
+}
+.refreshButton {
+  font-size: x-large;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  color: white;
+  padding: 4px;
+  cursor: default;
+  z-index: 2;
+}
+.removeButton:hover,
+.refreshButton:hover {
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ffff, 0 0 40px white,
+    0 0 50px white, 0 0 60px white, 0 0 70px white;
+}
 
-  @media (max-width: 1130px){
-    .container {
-        width: 100%;
-    } 
-    
-   
-   
-   
-}  
-   
+h5 {
+  width: fit-content;
+  margin: auto;
+  font-size: x-large;
+}
 
+@media (max-width: 1130px) {
+  .container {
+    width: 100%;
+  }
+}

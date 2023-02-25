@@ -24,8 +24,9 @@ const PlacesContextProvider = (props) => {
     const getWeatherData = await fetch(
       `https://api.openweathermap.org/data/2.5/onecall?lat=${fullCity.lat}&lon=${fullCity.long}&units=metric&exclude=minutely&appid=${process.env.REACT_APP_API_KEY}`
     );
-    const weatherData = await getWeatherData.json();
 
+    const weatherData = await getWeatherData.json();
+    console.log(weatherData);
     setCityWeatherInfo((prevValue) => {
       return [...prevValue, weatherData];
     });
@@ -35,7 +36,7 @@ const PlacesContextProvider = (props) => {
     setIsvisible(false);
   };
 
-  const addFavoritePlaceHandler = async (city) => {
+  const addFavoritePlaceHandler = async (lat, long, city = "") => {
     if (favPlaces.some((e) => e.cityName === city)) {
       setError("That city is already added to favorites");
       setTimeout(() => {
@@ -51,8 +52,11 @@ const PlacesContextProvider = (props) => {
       return;
     }
 
+    // const response = await fetch(
+    //   `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}`
+    // );
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}`
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${process.env.REACT_APP_API_KEY}`
     );
     if (!response.ok) {
       console.error("There is no info about that city");
@@ -63,9 +67,10 @@ const PlacesContextProvider = (props) => {
       throw Error(response.statusText);
     }
     const data = await response.json();
+    console.log("city data", data);
 
     const fullCity = {
-      cityName: city,
+      cityName: data.name,
       cityCode: data.sys.country,
       lat: data.coord.lat,
       long: data.coord.lon,

@@ -1,5 +1,81 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
+/* body {
+  font-family: sans-serif;
+  font-size: 100%;
+  color: #222;
+  background-color: #fafafe;
+  margin: 1em;
+} */
 
+label,
+button {
+  display: block;
+  margin-top: 1em;
+}
+input[list] {
+  color: black !important;
+  background-color: #036;
+}
+option#cities {
+  background-color: #036;
+}
 
+/* <datalist> and <option> styling */
+datalist {
+  position: absolute;
+  max-height: 20em;
+  border: 0 none;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.input-super {
+  position: relative;
+}
+datalist option {
+  font-size: 0.8em;
+  padding: 0.3em 1em;
+  background-color: green !important;
+  cursor: pointer;
+}
 
+datalist option:hover,
+datalist option:focus {
+  color: #fff;
+  background-color: #036;
+  outline: 0 none;
+}
+datalist {
+  position: absolute;
+  max-height: 20em;
+  border: 0 none;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 
+datalist option {
+  font-size: 0.8em;
+  padding: 0.3em 1em;
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+/* option active styles */
+datalist option:hover,
+datalist option:focus {
+  color: #fff;
+  background-color: #036;
+  outline: 0 none;
+}
+
+#cities option {
+  font-size: 1.8em;
+  padding: 0.3em 1em;
+  background-color: #ccc;
+  background-color: green;
+  cursor: pointer;
+}

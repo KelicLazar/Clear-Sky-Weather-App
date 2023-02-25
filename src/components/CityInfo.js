@@ -1,20 +1,29 @@
 import React, { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { PlacesContext } from "../context/place-context";
 import Nav from "./Nav";
 import classes from "./CityInfo.module.css";
 import FlexContainer from "./ui/FlexContainer";
 import FlexItem from "./ui/FlexItem";
+import { getCityInfo } from "../services/city-services";
+import { useState } from "react";
+import { useEffect } from "react";
+import { Skeleton } from "@mui/material";
 
 const CityInfo = () => {
   const params = useParams();
+  const location = useLocation();
+  // const [cityInfo, setCityInfo] = useState([]);
+  const cityInfo = location.state;
+  console.log(cityInfo, "cityInfo");
+  console.log("location", location);
+  console.log(params.city);
 
   const placesCtx = useContext(PlacesContext);
-  const placeIndex = placesCtx.favoritePlaces.findIndex(
-    (element) => element.cityName === params.city
-  );
-
-  const cityInfo = placesCtx.cityWeatherInfo[placeIndex];
+  const placeIndex = 1;
+  // placesCtx.favoritePlaces.findIndex(
+  //   (element) => element.cityName === params.city
+  // );
 
   return (
     <React.Fragment>
@@ -57,10 +66,12 @@ const CityInfo = () => {
               </h2>
               <div>
                 <p>{params.city}</p>
+
                 <img
                   alt=""
                   src={`http://openweathermap.org/img/wn/${day.weather[0].icon}.png`}
                 ></img>
+
                 <p>
                   {day.weather[0].description.charAt(0).toUpperCase() +
                     day.weather[0].description.slice(1)}
@@ -84,6 +95,7 @@ const CityInfo = () => {
                   </p>
                 </div>
               </div>
+
               <div className={classes.table}>
                 <div>
                   <p>Humidity</p>
